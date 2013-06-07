@@ -161,7 +161,7 @@ class AccountConfirmSubmission {
 		$dbw->begin();
 
 		# Make a random password
-		$p = md5(strtolower($this->userName));
+		$p = md5(strtolower($accReq->getNotes()));
 
 		# Insert the new user into the DB...
 		$tokenExpires = $accReq->getEmailTokenExpires();
