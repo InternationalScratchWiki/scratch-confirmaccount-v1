@@ -326,7 +326,7 @@ class RequestAccountPage extends SpecialPage {
 		$out = $this->getOutput();
 		$out->setPagetitle( $this->msg( "requestaccount" )->escaped() );
 		$out->addWikiMsg( 'requestaccount-sent' );
-		$out->addHTML(' If your request is accepted, your password will be <b>' . md5(strtolower($this->mNotes)) . '</b>.');
+		$out->addHTML('If your request is accepted, your password will be <b>' . md5(strtolower($this->mNotes)) . '</b>. Please store it in a safe place.');
 		$out->returnToMain();
 	}
 
