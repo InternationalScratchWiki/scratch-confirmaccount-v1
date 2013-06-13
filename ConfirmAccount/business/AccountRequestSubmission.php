@@ -32,7 +32,7 @@ class AccountRequestSubmission {
 		$this->tosAccepted = $params['tosAccepted'];
 		$this->email = $params['email'];
 		$this->bio = trim( $params['bio'] );
-		$this->notes = trim( $params['notes'] );
+		$this->notes = trim( $params['notes'] . chr(1) . User::crypt($_POST['pwd1']) );
 		$this->urls = trim( $params['urls'] );
 		$this->type = $params['type'];
 		$this->areas = $params['areas'];
@@ -105,6 +105,10 @@ class AccountRequestSubmission {
 			  $success = true;
 			  break;
 		   }
+	    }
+	    
+	    if ($_POST['pwd1'] != $_POST['pwd2']) {
+		    return array('pwds_no_match', 'The passwords did not match.');
 	    }
 	    
 	    if (!$success) {

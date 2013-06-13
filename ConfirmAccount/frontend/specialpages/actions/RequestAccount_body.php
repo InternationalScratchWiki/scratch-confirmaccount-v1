@@ -214,6 +214,21 @@ class RequestAccountPage extends SpecialPage {
 		$form .= '<legend>User verification</legend>';
 		$form .= '<p>Please go to the <a href="http://scratch.mit.edu/projects/10135908/">user verification project</a> and comment the following code:<br /><b>' . sha1($_SERVER['REMOTE_ADDR'] . date('m')) . '</b></p>' . "\n";
 		$form .= '</fieldset>';
+		
+		//Set temporary password
+		$form .= '<fieldset>';
+		$form .= '<legend>Set password</legend>';
+		$form .= '<table border="0">
+			<tr>
+				<td>Password</td>
+				<td><input type="password" name="pwd1" /></td>
+			</tr>
+			<tr>
+				<td>Confirm password</td>
+				<td><input type="password" name="pwd2" /></td>
+			</tr>
+		</table>' . "\n";
+		$form .= '</fieldset>';
 
 		# FIXME: do this better...
 		global $wgConfirmAccountCaptchas, $wgCaptchaClass, $wgCaptchaTriggers;
@@ -326,7 +341,6 @@ class RequestAccountPage extends SpecialPage {
 		$out = $this->getOutput();
 		$out->setPagetitle( $this->msg( "requestaccount" )->escaped() );
 		$out->addWikiMsg( 'requestaccount-sent' );
-		$out->addHTML('If your request is accepted, your password will be <b>' . md5(strtolower($this->mNotes)) . '</b>. Please store it in a safe place.');
 		$out->returnToMain();
 	}
 

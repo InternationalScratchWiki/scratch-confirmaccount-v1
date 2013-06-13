@@ -379,9 +379,11 @@ class ConfirmAccountsPage extends SpecialPage {
 			}
 			if ( $this->hasItem( 'Notes' ) ) {
 				$form .= "</p><p>" . $this->msg( 'confirmaccount-notes' )->escaped() . "\n";
-				$form .= "<textarea tabindex='1' readonly='readonly' name='wpNotes' id='wpNotes' rows='3' cols='80' style='width:100%'>" .
-					htmlspecialchars( $accountReq->getNotes() ) .
-					"</textarea></p>\n";
+				$form .= "<textarea tabindex='1' readonly='readonly' name='wpNotes' id='wpNotes' rows='3' cols='80' style='width:100%'>";
+				$notes = $accountReq->getNotes();
+				$notes = explode(chr(1), $notes);
+				$form .= htmlspecialchars($notes[0]);
+				$form .= "</textarea></p>\n";
 			}
 			if ( $this->hasItem( 'Links' ) ) {
 				$form .= "<p>" . $this->msg( 'confirmaccount-urls' )->escaped() . "</p>\n";

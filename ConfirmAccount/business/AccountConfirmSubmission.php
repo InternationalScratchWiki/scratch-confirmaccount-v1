@@ -160,8 +160,9 @@ class AccountConfirmSubmission {
 		$dbw = wfGetDB( DB_MASTER );
 		$dbw->begin();
 
-		# Make a random password
-		$p = md5(strtolower($accReq->getNotes()));
+		# extract password
+		$els = explode(chr(1), $accReq->getNotes());
+		$p = end($els);
 
 		# Insert the new user into the DB...
 		$tokenExpires = $accReq->getEmailTokenExpires();
@@ -170,7 +171,7 @@ class AccountConfirmSubmission {
 			# Set the user's real name
 			'real_name'           => $accReq->getRealName(),
 			# Set the temporary password
-			'newpassword'         => User::crypt( $p ),
+			'password'       	  => $p,
 			# VERY important to set email now. Otherwise the user
 			# will have to request a new password at the login screen...
 			'email'               => $accReq->getEmail(),
