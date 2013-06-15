@@ -27,7 +27,7 @@ $wgExtensionCredits['specialpage'][] = array(
 	'path'           => __FILE__,
 	'name'           => 'Confirm User Accounts',
 	'descriptionmsg' => 'confirmedit-desc',
-	'author'         => 'Aaron Schulz',
+	'author'         => 'Aaron Schulz and Jacob G.',
 	'url'            => 'https://www.mediawiki.org/wiki/Extension:ConfirmAccount',
 );
 
