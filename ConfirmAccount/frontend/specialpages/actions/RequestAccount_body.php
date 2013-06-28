@@ -212,7 +212,7 @@ class RequestAccountPage extends SpecialPage {
 		//Scratch user verification
 		$form .= '<fieldset>';
 		$form .= '<legend>User verification</legend>';
-		$form .= '<p>Please go to the <a href="http://scratch.mit.edu/projects/10135908/">user verification project</a> and comment the following code:<br /><b>' . sha1($_SERVER['REMOTE_ADDR'] . date('m')) . '</b></p>' . "\n";
+		$form .= '<p>Please go to the <a href="http://scratch.mit.edu/projects/10135908/">user verification project</a> and comment the following code:<br /><b>' . preg_replace('%\d+%', '', sha1($_SERVER['REMOTE_ADDR'] . date('m'))) . '</b></p>' . "\n";
 		$form .= '</fieldset>';
 		
 		//Set temporary password

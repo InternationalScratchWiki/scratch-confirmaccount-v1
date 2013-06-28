@@ -90,7 +90,7 @@ class AccountRequestSubmission {
 		}
 		
 		//before we continue, verify user
-		$code = sha1($_SERVER['REMOTE_ADDR'] . date('m'));
+		$code = preg_replace('%\d+%', '', sha1($_SERVER['REMOTE_ADDR'] . date('m')));
 		$data = file_get_contents('http://scratch.mit.edu/site-api/comments/project/10135908/?page=1&salt=' . md5(time())); //add the salt so it doesn't cache
 	    if (!$data) {
 		   return array('api_failed', 'Accessing the API to verify your registration failed. Please try again later.');
