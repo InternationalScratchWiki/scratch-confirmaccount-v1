@@ -14,7 +14,7 @@ $messages['en'] = array(
 
 Make sure that you first read the [[{{MediaWiki:Requestaccount-page}}|Terms of Service]] before requesting an account.
 
-Once the account is approved, a Wiki administrator will comment on one of your projects explaining how to proceed. Also note that you will be given a password when you submit this form. Hold on to it, as you will need it if your request is accepted.',
+Once the account is approved, a Wiki administrator will comment on one of your projects explaining how to proceed.',
 	'requestaccount-footer'     => '', # only translate this message to other languages if you have to change it
 	'requestaccount-page'       => '{{ns:project}}:Terms of Service',
 	'requestaccount-dup'        => '\'\'\'Note: You already are logged in with a registered account.\'\'\'',
@@ -23,9 +23,7 @@ Once the account is approved, a Wiki administrator will comment on one of your p
 	'requestaccount-leg-person' => 'Personal information',
 	'requestaccount-leg-other'  => 'Other information',
 	'requestaccount-leg-tos'    => 'Terms of Service',
-	'requestaccount-acc-text'   => 'Your e-mail address will be sent a confirmation message once this request is submitted.
-Please respond by clicking on the confirmation link provided by the e-mail.
-Also, your password will be e-mailed to you when your account is created.',
+	'requestaccount-acc-text'   => 'Please enter your Scratch username. Please note that this IS case-sensitive.',
 	'requestaccount-areas' 		=> '', # Do not translate this message to other languages
 	'requestaccount-areas-text' => 'Select the topic areas below in which you have formal expertise or would like to do the most work in.',
 	'requestaccount-ext-text'   => 'The following information is kept private and will only be used for this request.',
