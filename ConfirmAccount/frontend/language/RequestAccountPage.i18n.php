@@ -72,7 +72,7 @@ You cannot make any more requests.",
 
 	//Scratch-specific stuff
 	'requestaccount-user-verification' => 'User verification',
-	'requestaccount-code-troubleshoot' => '\'\'\'Note:\'\'\' If you are having problems with User verification not working, please see our [http://wiki.scratch.mit.edu/wiki/Scratch_Wiki:Become_a_contributor/Verification_code_troubleshooting troubleshooting page]',
+	'requestaccount-code-troubleshoot' => '\'\'\'Note:\'\'\' If you are having problems with user verification not working, please see our [[Scratch_Wiki:Become a contributor/Verification code troubleshooting|troubleshooting page]]',
 	'requestaccount-set-pwd'			=> 'Set password',
 	'requestaccount-project-info'		=> 'Please go to the [$1 user verification project] and comment the following code:<br />\'\'\'$2\'\'\'',
 	'requestaccount-project-link' 		=> 'http://scratch.mit.edu/projects/10135908/'

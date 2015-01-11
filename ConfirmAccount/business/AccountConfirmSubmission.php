@@ -122,7 +122,7 @@ class AccountConfirmSubmission {
 		}
 
 		# Send out a request hold email...
-		$result = $u->sendMail(
+		/*$result = $u->sendMail(
 			$context->msg( 'confirmaccount-email-subj' )->inContentLanguage()->text(),
 			$context->msg( 'confirmaccount-email-body5', $u->getName(), $this->reason )->inContentLanguage()->text()
 		);
@@ -130,7 +130,7 @@ class AccountConfirmSubmission {
 			$dbw->rollback();
 			return array( 'accountconf_mailerror',
 				$context->msg( 'mailerror' )->rawParams( $context->getOutput()->parse( $result->getWikiText() ) )->text() );
-		}
+		}*/
 
 		# Clear cache for notice of how many account requests there are
 		ConfirmAccount::clearAccountRequestCountCache();
