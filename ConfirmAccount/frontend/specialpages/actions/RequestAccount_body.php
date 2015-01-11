@@ -212,7 +212,7 @@ class RequestAccountPage extends SpecialPage {
 		//Scratch user verification
 		$form .= '<fieldset>';
 		$form .= '<legend>' . $this->msg('requestaccount-user-verification') . '</legend>';
-		$form .= '<p>' . $this->msg('requestaccount-project-info', $this->msg('requestaccount-project-link'), sha1($_SERVER['REMOTE_ADDR'] . date('m'))) . '</b></p>
+		$form .= '<p>' . $this->msg('requestaccount-project-info', $this->msg('requestaccount-project-link')->text(), sha1($_SERVER['REMOTE_ADDR'] . date('m'))) . '</b></p>
 		<p>' . $this->msg('requestaccount-code-troubleshoot') . '</p>' . "\n";
 		$form .= '</fieldset>';
 		
