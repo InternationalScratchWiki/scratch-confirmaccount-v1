@@ -69,6 +69,13 @@ The e-mail address has been confirmed. You can confirm the request here "$2".',
 
 	'acct_request_throttle_hit' => "Sorry, you have already requested {{PLURAL:$1|1 account|$1 accounts}}.
 You cannot make any more requests.",
+
+	//Scratch-specific stuff
+	'requestaccount-user-verification' => 'User verification',
+	'requestaccount-code-troubleshoot' => '<b>Note:</b>If you are having problems with User verification not working, please see our <a href="http://wiki.scratch.mit.edu/wiki/Scratch_Wiki:Become_a_contributor/Verification_code_troubleshooting">Troubleshooting page</a>',
+	'requestaccount-set-pwd'			=> 'Set password',
+	'requestaccount-project-info'		=> 'Please go to the <a href="$1">user verification project</a> and comment the following code:<br /><b>$2</b>',
+	'requestaccount-project-link' 		=> 'http://scratch.mit.edu/projects/10135908/'
 );
 
 /** Message documentation (Message documentation)

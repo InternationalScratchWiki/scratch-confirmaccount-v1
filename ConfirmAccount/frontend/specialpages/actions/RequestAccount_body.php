@@ -211,14 +211,14 @@ class RequestAccountPage extends SpecialPage {
 		
 		//Scratch user verification
 		$form .= '<fieldset>';
-		$form .= '<legend>User verification</legend>';
-		$form .= '<p>Please go to the <a href="http://scratch.mit.edu/projects/10135908/">user verification project</a> and comment the following code:<br /><b>' . sha1($_SERVER['REMOTE_ADDR'] . date('m')) . '</b></p>
-		<p><b>Note:</b>If you are having problems with User verification not working, please see our <a href="http://wiki.scratch.mit.edu/wiki/Scratch_Wiki:Become_a_contributor/Verification_code_troubleshooting">Troubleshooting page</a></p>' . "\n";
+		$form .= '<legend>' . $this->msg('requestaccount-user-verification') . '</legend>';
+		$form .= '<p>' . $this->msg('requestaccount-project-info', $this->msg('requestaccount-project-link'), sha1($_SERVER['REMOTE_ADDR'] . date('m'))) . '</b></p>
+		<p>' . $this->msg('requestaccount-code-troubleshoot') . '</p>' . "\n";
 		$form .= '</fieldset>';
 		
 		//Set temporary password
 		$form .= '<fieldset>';
-		$form .= '<legend>Set password</legend>';
+		$form .= '<legend>' . $this->msg('requestaccount-set-pwd') . '</legend>';
 		$form .= '<table border="0">
 			<tr>
 				<td>Password</td>
