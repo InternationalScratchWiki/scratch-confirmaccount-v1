@@ -435,9 +435,14 @@ class ConfirmAccountsPage extends SpecialPage {
 		$form .= "<td>" . Xml::radio( 'wpSubmitType', 'hold', $this->submitType == 'hold',
 			array( 'id' => 'submitHold', 'onclick' => 'document.getElementById("wpComment").style.display="block"' ) );
 		$form .= ' ' . Xml::label( $this->msg( 'confirmaccount-hold' )->text(), 'submitHold' ) . "</td>\n";
-		$form .= "<td>" . Xml::radio( 'wpSubmitType', 'spam', $this->submitType == 'spam',
-			array( 'id' => 'submitSpam', 'onclick' => 'document.getElementById("wpComment").style.display="none"' ) );
-		$form .= ' ' . Xml::label( $this->msg( 'confirmaccount-spam' )->text(), 'submitSpam' ) . "</td>\n";
+		if ($rejectTimestamp || $heldTimestamp) {
+			$form .= "<td>" . Xml::radio( 'wpSubmitType', 'delete', $this->submitType == 'delete',
+				array( 'id' => 'submitDelete', 'onclick' => 'document.getElementById("wpComment").style.display="block"' ) );
+			$form .= ' ' . Xml::label( $this->msg( 'delete' )->text(), 'submitDelete' ) . "</td>\n";
+		}
+		//$form .= "<td>" . Xml::radio( 'wpSubmitType', 'spam', $this->submitType == 'spam',
+		//	array( 'id' => 'submitSpam', 'onclick' => 'document.getElementById("wpComment").style.display="none"' ) );
+		//$form .= ' ' . Xml::label( $this->msg( 'confirmaccount-spam' )->text(), 'submitSpam' ) . "</td>\n";
 		$form .= "</tr></table>";
 		$form .= "<div id='wpComment'><p>" . $this->msg( 'confirmaccount-reason' )->escaped() . "</p>\n";
 		$form .= "<p><textarea name='wpReason' id='wpReason' rows='3' cols='80' style='width:80%; display=block;'>" .

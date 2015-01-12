@@ -46,6 +46,8 @@ class AccountConfirmSubmission {
 			return $this->holdRequest( $context );
 		} elseif ( $this->action === 'accept' ) {
 			return $this->acceptRequest( $context );
+		} elseif ($this->action === 'delete') {
+			return $this->deleteRequest($context);
 		} else {
 			return array( 'accountconf_bad_action', $context->msg( 'confirmaccount-badaction' )->escaped() );
 		}
@@ -60,6 +62,17 @@ class AccountConfirmSubmission {
 			# Clear cache for notice of how many account requests there are
 			ConfirmAccount::clearAccountRequestCountCache();
 		}
+
+		$dbw->commit();
+		return array( true, null );
+	}
+	
+	protected function deleteRequest( IContextSource $context ) {
+		$dbw = wfGetDB( DB_MASTER );
+		$dbw->begin();
+
+		$ok = $this->accountReq->remove();
+		ConfirmAccount::clearAccountRequestCountCache();
 
 		$dbw->commit();
 		return array( true, null );

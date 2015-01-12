@@ -139,6 +139,7 @@ There may be contact lists on site that you can use if you want to know more abo
 $2
 
 There may be contact lists on site that you can use if you want to know more about user account policy.',
+	
 );
 
 /** Message documentation (Message documentation)
@@ -5726,7 +5727,7 @@ $2
 Aquò permet d’èsser sus la tièra dels contactes del site, se ne desiratz saber mai sus las règlas que concernisson los comptes.',
 );
 
-/** Oriya (ଓଡ଼ିଆ)
+/** Oriya (ଓଡ଼ିଆ)
  * @author Odisha1
  */
 $messages['or'] = array(
