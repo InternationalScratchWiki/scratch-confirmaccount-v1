@@ -230,7 +230,7 @@ class RequestAccountPage extends SpecialPage {
 			</tr>
 		</table>' . "\n";
 		$form .= '</fieldset>';
-
+		
 		# FIXME: do this better...
 		global $wgConfirmAccountCaptchas, $wgCaptchaClass, $wgCaptchaTriggers;
 		if ( $wgConfirmAccountCaptchas && isset( $wgCaptchaClass )

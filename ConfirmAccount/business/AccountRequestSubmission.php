@@ -110,9 +110,13 @@ class AccountRequestSubmission {
 	    if ($_POST['pwd1'] != $_POST['pwd2']) {
 		    return array('pwds_no_match', 'The passwords did not match.');
 	    }
+		
+		if (strlen($_POST['pwd1']) <= 4) {
+			return array('pwd_too_short', 'The password is too short');
+		}
 	    
 	    if (!$success) {
-		    return array('no_comment', 'It does not appear you commented the verification code on the specified project. Please try again.');
+		    return array('no_comment', $this->msg('requestaccount-nocomment-error'));
 	    }
 		
 		$u = User::newFromName( $this->userName, 'creatable' );

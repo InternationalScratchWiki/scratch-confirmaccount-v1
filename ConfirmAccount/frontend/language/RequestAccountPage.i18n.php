@@ -75,7 +75,8 @@ You cannot make any more requests.",
 	'requestaccount-code-troubleshoot' => '\'\'\'Note:\'\'\' If you are having problems with user verification not working, please see our [[Scratch_Wiki:Become a contributor/Verification code troubleshooting|troubleshooting page]]',
 	'requestaccount-set-pwd'			=> 'Set password',
 	'requestaccount-project-info'		=> 'Please go to the [$1 user verification project] and comment the following code:<br />\'\'\'$2\'\'\'',
-	'requestaccount-project-link' 		=> 'http://scratch.mit.edu/projects/10135908/'
+	'requestaccount-project-link' 		=> 'http://scratch.mit.edu/projects/10135908/',
+	'requestaccount-nocomment-error'	=> 'It does not appear you commented the verification code on the specified project. Please try again.',
 );
 
 /** Message documentation (Message documentation)
