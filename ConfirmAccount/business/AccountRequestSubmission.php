@@ -24,7 +24,7 @@ class AccountRequestSubmission {
 	protected $attachmentDidNotForget; // user already saw "please re-attach" notice
 	protected $attachmentSize; // bytes size of file
 	protected $attachmentTempPath; // tmp path file was uploaded to FS
-
+		
 	public function __construct( User $requester, array $params ) {
 		$this->requester = $requester;
 		$this->userName = trim( $params['userName'] );
@@ -90,10 +90,10 @@ class AccountRequestSubmission {
 		}
 		
 		//before we continue, verify user
-		$code = sha1($_SERVER['REMOTE_ADDR'] . date('m'));
+		$code = $context->getRequest()->getSessionData('confirmaccount-code');
 		$data = file_get_contents('http://scratch.mit.edu/site-api/comments/project/10135908/?page=1&salt=' . md5(time())); //add the salt so it doesn't cache
 	    if (!$data) {
-		   return array('api_failed', 'Accessing the API to verify your registration failed. Please try again later.');
+		   return array('api_failed', $context->msg('requestaccount-api-failed'));
 		   return;
 	    }
 	    $success = false;
@@ -108,15 +108,15 @@ class AccountRequestSubmission {
 	    }
 	    
 	    if ($_POST['pwd1'] != $_POST['pwd2']) {
-		    return array('pwds_no_match', 'The passwords did not match.');
+		    return array('pwds_no_match', $context->msg('badretype'));
 	    }
 		
 		if (strlen($_POST['pwd1']) <= 4) {
-			return array('pwd_too_short', 'The password is too short');
+			return array('pwd_too_short', $context->msg('passwordtooshort', 5));
 		}
 	    
 	    if (!$success) {
-		    return array('no_comment', $this->msg('requestaccount-nocomment-error'));
+		    return array('no_comment', $context->msg('requestaccount-nocomment-error'));
 	    }
 		
 		$u = User::newFromName( $this->userName, 'creatable' );

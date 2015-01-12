@@ -77,6 +77,7 @@ You cannot make any more requests.",
 	'requestaccount-project-info'		=> 'Please go to the [$1 user verification project] and comment the following code:<br />\'\'\'$2\'\'\'',
 	'requestaccount-project-link' 		=> 'http://scratch.mit.edu/projects/10135908/',
 	'requestaccount-nocomment-error'	=> 'It does not appear you commented the verification code on the specified project. Please try again.',
+	'requestaccount-api-failed'			=> 'Accessing the API to verify your registration failed. Please try again later.',
 );
 
 /** Message documentation (Message documentation)

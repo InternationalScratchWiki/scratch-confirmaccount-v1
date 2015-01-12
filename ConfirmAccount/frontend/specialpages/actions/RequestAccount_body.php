@@ -92,6 +92,12 @@ class RequestAccountPage extends SpecialPage {
 	protected function showForm( $msg = '', $forgotFile = 0 ) {
 		global $wgAccountRequestTypes, $wgMakeUserPageFromBio;
 
+		//generate the codes randomly, and generate a new one every two hours in case the code gets censored for some reason or any other issue related to the code
+		if (!$this->getRequest()->getSessionData('confirmaccount-code') || $this->getRequest()->getSessionData('confirmaccount-time') < time() - 60 * 60 * 2) {
+			$this->getRequest()->setSessionData('confirmaccount-code', sha1(rand(1,999999999)));
+			$this->getRequest()->setSessionData('confirmaccount-time', time());
+		}
+
 		$reqUser = $this->getUser();
 
 		$this->mForgotAttachment = $forgotFile;
@@ -212,7 +218,7 @@ class RequestAccountPage extends SpecialPage {
 		//Scratch user verification
 		$form .= '<fieldset>';
 		$form .= '<legend>' . $this->msg('requestaccount-user-verification') . '</legend>';
-		$form .= '<p>' . $this->msg('requestaccount-project-info', $this->msg('requestaccount-project-link')->text(), sha1($_SERVER['REMOTE_ADDR'] . date('m'))) . '</b></p>
+		$form .= '<p>' . $this->msg('requestaccount-project-info', $this->msg('requestaccount-project-link')->text(), $this->getRequest()->getSessionData('confirmaccount-code')) . '</p>
 		<p>' . $this->msg('requestaccount-code-troubleshoot') . '</p>' . "\n";
 		$form .= '</fieldset>';
 		
@@ -319,7 +325,7 @@ class RequestAccountPage extends SpecialPage {
 				'attachmentSrcName'         => $this->mSrcName,
 				'attachmentDidNotForget'    => $this->mForgotAttachment, // confusing name :)
 				'attachmentSize'            => $this->mFileSize,
-				'attachmentTempPath'        => $this->mTempPath
+				'attachmentTempPath'        => $this->mTempPath,
 			)
 		);
 
