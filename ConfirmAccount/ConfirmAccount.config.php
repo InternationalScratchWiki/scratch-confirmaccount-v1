@@ -107,8 +107,10 @@ $wgGroupPermissions['bureaucrat']['confirmaccount'] = true;
 # This right has the request IP show when confirming accounts
 $wgGroupPermissions['bureaucrat']['requestips'] = true;
 
-# If credentials are stored, this right lets users look them up
+# If credentials are stored, this right lets users look them up - this just means being able to see the user's request notes
 $wgGroupPermissions['bureaucrat']['lookupcredentials'] = true;
+$wgGroupPermissions['sysop']['lookupcredentials'] = true;
+$wgGroupPermissions['Experienced_Wikians']['lookupcredentials'] = true;
 
 # Show notice for open requests to admins?
 # This is cached, but still can be expensive on sites with thousands of requests.
