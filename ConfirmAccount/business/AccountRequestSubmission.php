@@ -90,8 +90,11 @@ class AccountRequestSubmission {
 		}
 		
 		//before we continue, verify user
+		//the project link is stored in the interface, so splice the URL out of it (it should be the only decimal there)
+		$project_link = $context->msg('requestaccount-project-link')->text();
+		preg_match('%(\d+)%', $project_link, $matches);
 		$code = $context->getRequest()->getSessionData('confirmaccount-code');
-		$data = file_get_contents('http://scratch.mit.edu/site-api/comments/project/10135908/?page=1&salt=' . md5(time())); //add the salt so it doesn't cache
+		$data = file_get_contents('http://scratch.mit.edu/site-api/comments/project/' . $matches[1] . '/?page=1&salt=' . md5(time())); //add the salt so it doesn't cache
 	    if (!$data) {
 		   return array('api_failed', $context->msg('requestaccount-api-failed'));
 		   return;
