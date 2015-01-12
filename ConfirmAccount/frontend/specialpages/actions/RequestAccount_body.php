@@ -221,11 +221,11 @@ class RequestAccountPage extends SpecialPage {
 		$form .= '<legend>' . $this->msg('requestaccount-set-pwd') . '</legend>';
 		$form .= '<table border="0">
 			<tr>
-				<td>' . $this->msg('createacct-yourpassword-ph') . '</td>
+				<td>' . $this->msg('yourpassword') . '</td>
 				<td><input type="password" name="pwd1" /></td>
 			</tr>
 			<tr>
-				<td>' . $this->msg('createacct-yourpasswordagain') . '</td>
+				<td>' . $this->msg('yourpasswordagain') . '</td>
 				<td><input type="password" name="pwd2" /></td>
 			</tr>
 		</table>' . "\n";
