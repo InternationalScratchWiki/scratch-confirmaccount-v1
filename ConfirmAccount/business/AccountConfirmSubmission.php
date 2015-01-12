@@ -328,7 +328,7 @@ class AccountConfirmSubmission {
 		$this->createUserPage( $user );
 
 		# Greet the new user if set to do so.
-		$this->createUserTalkPage( $user );
+		$this->createUserTalkPage( $user, $this->reason );
 
 		return array( true, null );
 	}
@@ -442,14 +442,18 @@ class AccountConfirmSubmission {
 		);
 	}
 
-	protected function createUserTalkPage( User $user ) {
+	protected function createUserTalkPage( User $user, String $message = '' ) {
 		global $wgAutoWelcomeNewUsers;
 
 		if ( $wgAutoWelcomeNewUsers ) {
-			$msg = "confirmaccount-welc-pos{$this->type}";
-			$welcome = wfEmptyMsg( $msg )
-				? wfMessage( 'confirmaccount-welc' )->text()
-				: wfMessage( $msg )->text(); // custom message
+			if ($message == '') {
+				$msg = "confirmaccount-welc-pos{$this->type}";
+				$welcome = wfEmptyMsg( $msg )
+					? wfMessage( 'confirmaccount-welc' )->text()
+					: wfMessage( $msg )->text(); // custom message
+			} else {
+				$welcome = $message;
+			}
 			# Add user welcome message!
 			$article = new WikiPage( $user->getTalkPage() );
 			$article->doEdit(
