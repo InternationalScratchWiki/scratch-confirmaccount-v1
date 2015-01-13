@@ -23,7 +23,7 @@ Once the account is approved, a Wiki administrator will comment on one of your p
 	'requestaccount-leg-person' => 'Personal information',
 	'requestaccount-leg-other'  => 'Other information',
 	'requestaccount-leg-tos'    => 'Terms of Service',
-	'requestaccount-acc-text'   => 'Please enter your Scratch username. Please note that this IS case-sensitive.',
+	'requestaccount-acc-text'   => 'When your account is created, you will be notified via a comment on your profile whether your request was accepted or rejected. Please try to remember the password you set (if in doubt set it to the same thing as your Scratch password). Please note that nobody can see your password.',
 	'requestaccount-areas' 		=> '', # Do not translate this message to other languages
 	'requestaccount-areas-text' => 'Select the topic areas below in which you have formal expertise or would like to do the most work in.',
 	'requestaccount-ext-text'   => 'The following information is kept private and will only be used for this request.',
