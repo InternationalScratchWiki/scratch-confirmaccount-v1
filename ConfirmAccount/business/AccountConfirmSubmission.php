@@ -446,7 +446,7 @@ class AccountConfirmSubmission {
 		global $wgAutoWelcomeNewUsers;
 
 		if ( $wgAutoWelcomeNewUsers ) {
-			if ($this->reason == '') {
+			if (trim($this->reason) == '') {
 				$msg = "confirmaccount-welc-pos{$this->type}";
 				$welcome = wfEmptyMsg( $msg )
 					? wfMessage( 'confirmaccount-welc' )->text()
