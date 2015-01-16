@@ -65,7 +65,7 @@ class ConfirmAccountUIHooks {
 			return true;
 		}
 		$count = ConfirmAccount::getOpenRequestCount( '*' );
-		if ( sizeof($count['open']) > 0 ) {
+		if ( $count['open'] > 0 ) {
 			$out->prependHtml(
 				'<div id="mw-confirmaccount-msg" class="plainlinks mw-confirmaccount-bar">' .
 				$context->msg( 'confirmaccount-newrequests' )->numParams( $count['open'] )->parse() .
