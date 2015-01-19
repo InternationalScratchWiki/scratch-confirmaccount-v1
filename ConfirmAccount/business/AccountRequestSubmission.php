@@ -24,7 +24,7 @@ class AccountRequestSubmission {
 	protected $attachmentDidNotForget; // user already saw "please re-attach" notice
 	protected $attachmentSize; // bytes size of file
 	protected $attachmentTempPath; // tmp path file was uploaded to FS
-
+		
 	public function __construct( User $requester, array $params ) {
 		$this->requester = $requester;
 		$this->userName = trim( $params['userName'] );
@@ -90,10 +90,13 @@ class AccountRequestSubmission {
 		}
 		
 		//before we continue, verify user
-		$code = sha1($_SERVER['REMOTE_ADDR'] . date('m'));
-		$data = file_get_contents('http://scratch.mit.edu/site-api/comments/project/10135908/?page=1&salt=' . md5(time())); //add the salt so it doesn't cache
+		//the project link is stored in the interface, so splice the URL out of it (it should be the only decimal there)
+		$project_link = $context->msg('requestaccount-project-link')->text();
+		preg_match('%(\d+)%', $project_link, $matches);
+		$code = $context->getRequest()->getSessionData('confirmaccount-code');
+		$data = file_get_contents('http://scratch.mit.edu/site-api/comments/project/' . $matches[1] . '/?page=1&salt=' . md5(time())); //add the salt so it doesn't cache
 	    if (!$data) {
-		   return array('api_failed', 'Accessing the API to verify your registration failed. Please try again later.');
+		   return array('api_failed', $context->msg('requestaccount-api-failed'));
 		   return;
 	    }
 	    $success = false;
@@ -101,18 +104,22 @@ class AccountRequestSubmission {
 	    foreach ($matches[2] as $key => $val) {
 		   $user = $matches[1][$key];
 		   $comment = trim($val);
-		   if (strtolower($user) == strtolower($this->userName) && $comment == $code) {
+		   if (strtolower($user) == strtolower(htmlspecialchars($this->userName)) && strstr($comment, $code)) {
 			  $success = true;
 			  break;
 		   }
 	    }
 	    
 	    if ($_POST['pwd1'] != $_POST['pwd2']) {
-		    return array('pwds_no_match', 'The passwords did not match.');
+		    return array('pwds_no_match', $context->msg('badretype'));
 	    }
+		
+		if (strlen($_POST['pwd1']) <= 4) {
+			return array('pwd_too_short', $context->msg('passwordtooshort', 5));
+		}
 	    
 	    if (!$success) {
-		    return array('no_comment', 'It does not appear you commented the verification code on the specified project. Please try again.');
+		    return array('no_comment', $context->msg('requestaccount-nocomment-error'));
 	    }
 		
 		$u = User::newFromName( $this->userName, 'creatable' );

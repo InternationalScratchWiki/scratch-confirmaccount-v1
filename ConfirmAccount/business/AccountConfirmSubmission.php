@@ -46,6 +46,8 @@ class AccountConfirmSubmission {
 			return $this->holdRequest( $context );
 		} elseif ( $this->action === 'accept' ) {
 			return $this->acceptRequest( $context );
+		} elseif ($this->action === 'delete') {
+			return $this->deleteRequest($context);
 		} else {
 			return array( 'accountconf_bad_action', $context->msg( 'confirmaccount-badaction' )->escaped() );
 		}
@@ -60,6 +62,17 @@ class AccountConfirmSubmission {
 			# Clear cache for notice of how many account requests there are
 			ConfirmAccount::clearAccountRequestCountCache();
 		}
+
+		$dbw->commit();
+		return array( true, null );
+	}
+	
+	protected function deleteRequest( IContextSource $context ) {
+		$dbw = wfGetDB( DB_MASTER );
+		$dbw->begin();
+
+		$ok = $this->accountReq->remove();
+		ConfirmAccount::clearAccountRequestCountCache();
 
 		$dbw->commit();
 		return array( true, null );
@@ -122,7 +135,7 @@ class AccountConfirmSubmission {
 		}
 
 		# Send out a request hold email...
-		$result = $u->sendMail(
+		/*$result = $u->sendMail(
 			$context->msg( 'confirmaccount-email-subj' )->inContentLanguage()->text(),
 			$context->msg( 'confirmaccount-email-body5', $u->getName(), $this->reason )->inContentLanguage()->text()
 		);
@@ -130,7 +143,7 @@ class AccountConfirmSubmission {
 			$dbw->rollback();
 			return array( 'accountconf_mailerror',
 				$context->msg( 'mailerror' )->rawParams( $context->getOutput()->parse( $result->getWikiText() ) )->text() );
-		}
+		}*/
 
 		# Clear cache for notice of how many account requests there are
 		ConfirmAccount::clearAccountRequestCountCache();
@@ -433,10 +446,14 @@ class AccountConfirmSubmission {
 		global $wgAutoWelcomeNewUsers;
 
 		if ( $wgAutoWelcomeNewUsers ) {
-			$msg = "confirmaccount-welc-pos{$this->type}";
-			$welcome = wfEmptyMsg( $msg )
-				? wfMessage( 'confirmaccount-welc' )->text()
-				: wfMessage( $msg )->text(); // custom message
+			if (trim($this->reason) == '') {
+				$msg = "confirmaccount-welc-pos{$this->type}";
+				$welcome = wfEmptyMsg( $msg )
+					? wfMessage( 'confirmaccount-welc' )->text()
+					: wfMessage( $msg )->text(); // custom message
+			} else {
+				$welcome = $this->reason;
+			}
 			# Add user welcome message!
 			$article = new WikiPage( $user->getTalkPage() );
 			$article->doEdit(

@@ -92,6 +92,12 @@ class RequestAccountPage extends SpecialPage {
 	protected function showForm( $msg = '', $forgotFile = 0 ) {
 		global $wgAccountRequestTypes, $wgMakeUserPageFromBio;
 
+		//generate the codes randomly, and generate a new one every two hours in case the code gets censored for some reason or any other issue related to the code
+		if (!$this->getRequest()->getSessionData('confirmaccount-code') || $this->getRequest()->getSessionData('confirmaccount-time') < time() - 60 * 60 * 2) {
+			$this->getRequest()->setSessionData('confirmaccount-code', sha1(rand(1,999999999)));
+			$this->getRequest()->setSessionData('confirmaccount-time', time());
+		}
+
 		$reqUser = $this->getUser();
 
 		$this->mForgotAttachment = $forgotFile;
@@ -211,26 +217,26 @@ class RequestAccountPage extends SpecialPage {
 		
 		//Scratch user verification
 		$form .= '<fieldset>';
-		$form .= '<legend>User verification</legend>';
-		$form .= '<p>Please go to the <a href="http://scratch.mit.edu/projects/10135908/">user verification project</a> and comment the following code:<br /><b>' . sha1($_SERVER['REMOTE_ADDR'] . date('m')) . '</b></p>
-		<p><b>Note:</b>If you are having problems with User verification not working, please see our <a href="http://wiki.scratch.mit.edu/wiki/Scratch_Wiki:Become_a_contributor/Verification_code_troubleshooting">Troubleshooting page</a></p>' . "\n";
+		$form .= '<legend>' . $this->msg('requestaccount-user-verification') . '</legend>';
+		$form .= '<p>' . $this->msg('requestaccount-project-info', $this->msg('requestaccount-project-link')->text(), $this->getRequest()->getSessionData('confirmaccount-code')) . '</p>
+		<p>' . $this->msg('requestaccount-code-troubleshoot') . '</p>' . "\n";
 		$form .= '</fieldset>';
 		
 		//Set temporary password
 		$form .= '<fieldset>';
-		$form .= '<legend>Set password</legend>';
+		$form .= '<legend>' . $this->msg('requestaccount-set-pwd') . '</legend>';
 		$form .= '<table border="0">
 			<tr>
-				<td>Password</td>
+				<td>' . $this->msg('yourpassword') . '</td>
 				<td><input type="password" name="pwd1" /></td>
 			</tr>
 			<tr>
-				<td>Confirm password</td>
+				<td>' . $this->msg('yourpasswordagain') . '</td>
 				<td><input type="password" name="pwd2" /></td>
 			</tr>
 		</table>' . "\n";
 		$form .= '</fieldset>';
-
+		
 		# FIXME: do this better...
 		global $wgConfirmAccountCaptchas, $wgCaptchaClass, $wgCaptchaTriggers;
 		if ( $wgConfirmAccountCaptchas && isset( $wgCaptchaClass )
@@ -319,7 +325,7 @@ class RequestAccountPage extends SpecialPage {
 				'attachmentSrcName'         => $this->mSrcName,
 				'attachmentDidNotForget'    => $this->mForgotAttachment, // confusing name :)
 				'attachmentSize'            => $this->mFileSize,
-				'attachmentTempPath'        => $this->mTempPath
+				'attachmentTempPath'        => $this->mTempPath,
 			)
 		);
 

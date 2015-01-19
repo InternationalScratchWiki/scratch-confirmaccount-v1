@@ -64,11 +64,11 @@ class ConfirmAccountUIHooks {
 		if ( !$title->isSpecial( 'Recentchanges' ) && !$title->isSpecial( 'Watchlist' ) ) {
 			return true;
 		}
-		$count = ConfirmAccount::getOpenEmailConfirmedCount( '*' );
-		if ( $count > 0 ) {
+		$count = ConfirmAccount::getOpenRequestCount( '*' );
+		if ( $count['open'] > 0 ) {
 			$out->prependHtml(
 				'<div id="mw-confirmaccount-msg" class="plainlinks mw-confirmaccount-bar">' .
-				$context->msg( 'confirmaccount-newrequests' )->numParams( $count )->parse() .
+				$context->msg( 'confirmaccount-newrequests' )->numParams( $count['open'] )->parse() .
 				'</div>'
 			);
 

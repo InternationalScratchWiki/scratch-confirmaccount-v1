@@ -93,8 +93,8 @@ class UserCredentialsPage extends SpecialPage {
 		$form .= "<td>" . Linker::makeLinkObj( $user->getUserPage(), htmlspecialchars( $user->getUserPage()->getText() ) ) . "</td></tr>\n";
 
 		$econf = $row->acd_email_authenticated ? ' <strong>' . $this->msg( 'confirmaccount-econf' )->escaped() . '</strong>' : '';
-		$form .= "<tr><td>" . $this->msg( 'usercredentials-email' )->escaped() . "</td>";
-		$form .= "<td>" . htmlspecialchars( $row->acd_email ) . $econf . "</td></tr>\n";
+		//$form .= "<tr><td>" . $this->msg( 'usercredentials-email' )->escaped() . "</td>";
+		//$form .= "<td>" . htmlspecialchars( $row->acd_email ) . $econf . "</td></tr>\n";
 
 		$form .= $grouplist;
 
@@ -135,7 +135,7 @@ class UserCredentialsPage extends SpecialPage {
 			$form .= '</fieldset>';
 		}
 
-		$form .= '<fieldset>';
+		/*$form .= '<fieldset>';
 		$form .= '<legend>' . $this->msg( 'usercredentials-leg-person' )->escaped() . '</legend>';
 		$form .= '<table cellpadding=\'4\'>';
 		$form .= "<tr><td>" . $this->msg( 'usercredentials-real' )->escaped() . "</td>";
@@ -145,24 +145,27 @@ class UserCredentialsPage extends SpecialPage {
 		$form .= "<p><textarea tabindex='1' readonly='readonly' name='wpBio' id='wpNewBio' rows='10' cols='80' style='width:100%'>" .
 			htmlspecialchars( $row->acd_bio ) .
 			"</textarea></p>\n";
-		$form .= '</fieldset>';
+		$form .= '</fieldset>';*/
 
 		$form .= '<fieldset>';
 		$form .= '<legend>' . $this->msg( 'usercredentials-leg-other' )->escaped() . '</legend>';
 		if ( $this->hasItem( 'CV' ) || $this->hasItem( 'Notes' ) || $this->hasItem( 'Links' ) ) {
-			$form .= '<p>' . $this->msg( 'usercredentials-attach' )->escaped() . ' ';
+			/*$form .= '<p>' . $this->msg( 'usercredentials-attach' )->escaped() . ' ';
 			if ( $row->acd_filename ) {
 				$form .= Linker::makeKnownLinkObj( $titleObj, htmlspecialchars( $row->acd_filename ),
 					'file=' . $row->acd_storage_key );
 			} else {
 				$form .= $this->msg( 'confirmaccount-none-p' )->escaped();
 			}
-			$form .= "</p><p>" . $this->msg( 'usercredentials-notes' )->escaped() . "</p>\n";
+			$form .= '</p>';*/
+			//get rid of the hashed password, which is currently jammed in with the request notes
+			$notes_parts = explode(chr(1), $row->acd_notes);
+			$form .= '<p>' . $this->msg( 'usercredentials-notes' )->escaped() . "</p>\n";
 			$form .= "<p><textarea tabindex='1' readonly='readonly' name='wpNotes' id='wpNotes' rows='3' cols='80' style='width:100%'>" .
-				htmlspecialchars( $row->acd_notes ) .
+				htmlspecialchars( $notes_parts[0] ) .
 				"</textarea></p>\n";
-			$form .= "<p>" . $this->msg( 'usercredentials-urls' )->escaped() . "</p>\n";
-			$form .= ConfirmAccountsPage::parseLinks( $row->acd_urls );
+			/*$form .= "<p>" . $this->msg( 'usercredentials-urls' )->escaped() . "</p>\n";
+			$form .= ConfirmAccountsPage::parseLinks( $row->acd_urls );*/
 		}
 		$form .= '</fieldset>';
 

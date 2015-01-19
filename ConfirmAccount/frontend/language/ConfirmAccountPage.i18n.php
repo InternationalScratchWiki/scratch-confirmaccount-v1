@@ -28,10 +28,6 @@ They can still be approved into accounts.',
 	'confirmaccount-text'     => 'This is a pending request for a user account at \'\'\'{{SITENAME}}\'\'\'.
 
 Carefully review the below information.
-If you are approving this request, use the position dropdown to set the account status of the user.
-Edits made to the application biography will not affect any permanent credential storage.
-Note that you can choose to create the account under a different username.
-Use this only to avoid  collisions with other names.
 
 If you simply leave this page without confirming or denying this request, it will remain pending.',
 	'confirmaccount-none-o'   => 'There are currently no open pending account requests in this list.',
@@ -139,6 +135,7 @@ There may be contact lists on site that you can use if you want to know more abo
 $2
 
 There may be contact lists on site that you can use if you want to know more about user account policy.',
+	
 );
 
 /** Message documentation (Message documentation)
@@ -5726,7 +5723,7 @@ $2
 Aquò permet d’èsser sus la tièra dels contactes del site, se ne desiratz saber mai sus las règlas que concernisson los comptes.',
 );
 
-/** Oriya (ଓଡ଼ିଆ)
+/** Oriya (ଓଡ଼ିଆ)
  * @author Odisha1
  */
 $messages['or'] = array(

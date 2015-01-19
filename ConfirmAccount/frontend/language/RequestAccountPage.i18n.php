@@ -14,7 +14,7 @@ $messages['en'] = array(
 
 Make sure that you first read the [[{{MediaWiki:Requestaccount-page}}|Terms of Service]] before requesting an account.
 
-Once the account is approved, a Wiki administrator will comment on one of your projects explaining how to proceed. Also note that you will be given a password when you submit this form. Hold on to it, as you will need it if your request is accepted.',
+Once the account is approved, a Wiki administrator will comment on one of your projects explaining how to proceed.',
 	'requestaccount-footer'     => '', # only translate this message to other languages if you have to change it
 	'requestaccount-page'       => '{{ns:project}}:Terms of Service',
 	'requestaccount-dup'        => '\'\'\'Note: You already are logged in with a registered account.\'\'\'',
@@ -23,9 +23,7 @@ Once the account is approved, a Wiki administrator will comment on one of your p
 	'requestaccount-leg-person' => 'Personal information',
 	'requestaccount-leg-other'  => 'Other information',
 	'requestaccount-leg-tos'    => 'Terms of Service',
-	'requestaccount-acc-text'   => 'Your e-mail address will be sent a confirmation message once this request is submitted.
-Please respond by clicking on the confirmation link provided by the e-mail.
-Also, your password will be e-mailed to you when your account is created.',
+	'requestaccount-acc-text'   => 'When your account is created, you will be notified via a comment on your profile whether your request was accepted or rejected. Please try to remember the password you set (if in doubt set it to the same thing as your Scratch password). Please note that nobody can see your password.',
 	'requestaccount-areas' 		=> '', # Do not translate this message to other languages
 	'requestaccount-areas-text' => 'Select the topic areas below in which you have formal expertise or would like to do the most work in.',
 	'requestaccount-ext-text'   => 'The following information is kept private and will only be used for this request.',
@@ -71,6 +69,15 @@ The e-mail address has been confirmed. You can confirm the request here "$2".',
 
 	'acct_request_throttle_hit' => "Sorry, you have already requested {{PLURAL:$1|1 account|$1 accounts}}.
 You cannot make any more requests.",
+
+	//Scratch-specific stuff
+	'requestaccount-user-verification' => 'User verification',
+	'requestaccount-code-troubleshoot' => '\'\'\'Note:\'\'\' If you are having problems with user verification not working, please see our [[Scratch_Wiki:Become a contributor/Verification code troubleshooting|troubleshooting page]]',
+	'requestaccount-set-pwd'			=> 'Set password',
+	'requestaccount-project-info'		=> 'Please go to the [$1 user verification project] and comment the following code:<br />\'\'\'$2\'\'\'',
+	'requestaccount-project-link' 		=> 'http://scratch.mit.edu/projects/10135908/',
+	'requestaccount-nocomment-error'	=> 'It does not appear you commented the verification code on the specified project. Please try again.',
+	'requestaccount-api-failed'			=> 'Accessing the API to verify your registration failed. Please try again later.',
 );
 
 /** Message documentation (Message documentation)
