@@ -92,7 +92,7 @@ class RequestAccountPage extends SpecialPage {
 	protected function showForm( $msg = '', $forgotFile = 0 ) {
 		global $wgAccountRequestTypes, $wgMakeUserPageFromBio;
 
-		//generate the verification code, it's the floor of the time / 7200, so it changes every 2 hours (the next page also adds some fault tolerance if the code is entered on the hour border)
+		//generate the verification code, it uses the floor of the time / 1800, so it changes every 30 minutes (the next page also adds some fault tolerance if the code is entered on the border)
 		$vercode = sha1(floor(time() / 1800) . $_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
 
 		$reqUser = $this->getUser();
