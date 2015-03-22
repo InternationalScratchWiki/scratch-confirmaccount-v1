@@ -92,11 +92,8 @@ class RequestAccountPage extends SpecialPage {
 	protected function showForm( $msg = '', $forgotFile = 0 ) {
 		global $wgAccountRequestTypes, $wgMakeUserPageFromBio;
 
-		//generate the codes randomly, and generate a new one every two hours in case the code gets censored for some reason or any other issue related to the code
-		if (!$this->getRequest()->getSessionData('confirmaccount-code') || $this->getRequest()->getSessionData('confirmaccount-time') < time() - 60 * 60 * 2) {
-			$this->getRequest()->setSessionData('confirmaccount-code', sha1(rand(1,999999999)));
-			$this->getRequest()->setSessionData('confirmaccount-time', time());
-		}
+		//generate the verification code, it's the floor of the time / 7200, so it changes every 2 hours (the next page also adds some fault tolerance if the code is entered on the hour border)
+		$vercode = sha1(floor(time() / 1800) . $_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
 
 		$reqUser = $this->getUser();
 
@@ -218,7 +215,7 @@ class RequestAccountPage extends SpecialPage {
 		//Scratch user verification
 		$form .= '<fieldset>';
 		$form .= '<legend>' . $this->msg('requestaccount-user-verification') . '</legend>';
-		$form .= '<p>' . $this->msg('requestaccount-project-info', $this->msg('requestaccount-project-link')->text(), $this->getRequest()->getSessionData('confirmaccount-code')) . '</p>
+		$form .= '<p>' . $this->msg('requestaccount-project-info', $this->msg('requestaccount-project-link')->text(), $vercode) . '</p>
 		<p>' . $this->msg('requestaccount-code-troubleshoot') . '</p>' . "\n";
 		$form .= '</fieldset>';
 		
