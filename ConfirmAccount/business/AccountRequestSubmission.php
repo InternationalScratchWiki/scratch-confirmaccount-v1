@@ -60,6 +60,15 @@ class AccountRequestSubmission {
 	public function getAttachtmentPrevName() {
 		return $this->attachmentPrevName;
 	}
+	
+	private function stringContainsArray($string, $array) {
+	   foreach ($array as $val) {
+		   if (strstr($string, $val)) {
+			   return true;
+		   }
+	   }
+	   return false;
+   }
 
 	/**
 	 * Attempt to validate and submit this data to the DB
@@ -93,18 +102,21 @@ class AccountRequestSubmission {
 		//the project link is stored in the interface, so splice the URL out of it (it should be the only decimal there)
 		$project_link = $context->msg('requestaccount-project-link')->text();
 		preg_match('%(\d+)%', $project_link, $matches);
-		$code = $context->getRequest()->getSessionData('confirmaccount-code');
+		$codes = array();
+		for ($i = 0; $i <= 2; $i++) { //have a "fault-tolerance" of two, so if the code was generated and the time changed between entering the code and checking it, it still works
+			$codes[] = sha1((floor(time() / 1800) - $i) . $_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
+		}
 		$data = file_get_contents('http://scratch.mit.edu/site-api/comments/project/' . $matches[1] . '/?page=1&salt=' . md5(time())); //add the salt so it doesn't cache
 	    if (!$data) {
 		   return array('api_failed', $context->msg('requestaccount-api-failed'));
 		   return;
 	    }
 	    $success = false;
-	    preg_match_all('%<div id="comments-\d+" class="comment.*?" data-comment-id="\d+">.*?<a href="/users/(.*?)">.*?<div class="content">(.*?)</div>%ms', $data, $matches);
+	    preg_match_all('%<div id="comments-\d+" class="comment +" data-comment-id="\d+">.*?<a href="/users/(.*?)">.*?<div class="content">(.*?)</div>%ms', $data, $matches);
 	    foreach ($matches[2] as $key => $val) {
 		   $user = $matches[1][$key];
 		   $comment = trim($val);
-		   if (strtolower($user) == strtolower(htmlspecialchars($this->userName)) && strstr($comment, $code)) {
+		   if (strtolower($user) == strtolower(htmlspecialchars($this->userName)) && $this->stringContainsArray($comment, $codes)) {
 			  $success = true;
 			  break;
 		   }

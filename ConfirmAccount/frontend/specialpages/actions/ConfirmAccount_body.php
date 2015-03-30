@@ -295,7 +295,7 @@ class ConfirmAccountsPage extends SpecialPage {
 		$form .= '<legend>' . $this->msg( 'confirmaccount-leg-user' )->escaped() . '</legend>';
 		$form .= '<table cellpadding=\'4\'>';
 		$form .= "<tr><td>" . Xml::label( $this->msg( 'username' )->text(), 'wpNewName' ) . "</td>";
-		$form .= '<td>' . Xml::input( 'wpNewName', 30, $this->reqUsername, array( 'id' => 'wpNewName', 'type' => 'hidden' ) ) . ' <a href="http://scratch.mit.edu/users/' . htmlspecialchars(str_replace(' ', '_', $this->reqUsername)) . '">' . htmlspecialchars($this->reqUsername) . '</a></td></tr>' . "\n";
+		$form .= '<td>' . Xml::input( 'wpNewName', 30, $this->reqUsername, array( 'id' => 'wpNewName', 'type' => 'hidden' ) ) . ' <a href="http://scratch.mit.edu/users/' . htmlspecialchars(str_replace(' ', '_', $this->reqUsername)) . '" target="_BLANK">' . htmlspecialchars($this->reqUsername) . '</a></td></tr>' . "\n";
 		$econf = '';
 		/*if ( $accountReq->getEmailAuthTimestamp() ) {
 			$econf = ' <strong>' . $this->msg( 'confirmaccount-econf' )->escaped() . '</strong>';
