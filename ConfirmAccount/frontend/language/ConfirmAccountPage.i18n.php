@@ -135,6 +135,8 @@ There may be contact lists on site that you can use if you want to know more abo
 $2
 
 There may be contact lists on site that you can use if you want to know more about user account policy.',
+	'confirmaccount-altwarning'	=> 'The following accounts have made edits from the same IP address as this user:',
+	'confirmaccount-warning'	=> 'Warning',
 	
 );
 

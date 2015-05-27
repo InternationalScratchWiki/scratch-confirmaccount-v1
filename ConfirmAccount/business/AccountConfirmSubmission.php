@@ -294,10 +294,10 @@ class AccountConfirmSubmission {
 		}
 
 		# Actually send out the email (@TODO: rollback on failure including $wgAuth)
-		$result = $user->sendMail(
+		/*$result = $user->sendMail(
 			$context->msg( 'confirmaccount-email-subj' )->inContentLanguage()->text(),
 			$ebody
-		);
+		);*/
 
 		# Update user count
 		$ssUpdate = new SiteStatsUpdate( 0, 0, 0, 0, 1 );

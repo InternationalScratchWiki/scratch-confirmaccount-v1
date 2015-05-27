@@ -421,6 +421,20 @@ class ConfirmAccountsPage extends SpecialPage {
 			}
 			$form .= '</fieldset>';
 		}
+		
+		//search for possible alt accounts
+		$ip = $accountReq->getIP();
+		$alts = $this->getUsersFromIP($ip);
+		if (!empty($alts)) {
+			foreach ($alts as &$user) {
+				
+			}
+			$form .= '<fieldset>';
+			$form .= '<legend style="color:#F00; font-weight:bold">' . $this->msg('confirmaccount-warning') . '</legend>';
+			$form .= '<strong>' . $this->msg('confirmaccount-altwarning') . '</strong>';
+			$form .= '<ul><li>' . implode('</li><li>', $alts) . '</li></ul>';
+			$form .= '</fieldset>';
+		}
 
 		$form .= '<fieldset>';
 		$form .= '<legend>' . $this->msg( 'confirmaccount-legend' )->escaped() . '</legend>';
@@ -745,6 +759,21 @@ class ConfirmAccountsPage extends SpecialPage {
 		$r .= '</li>';
 
 		return $r;
+	}
+	
+	function getUsersFromIP($ip) {
+		global $wgShowExceptionDetails ;
+		$wgShowExceptionDetails  = true;
+       	$dbr = wfGetDB( DB_SLAVE );
+ 		$result = $dbr->select('recentchanges', array('DISTINCT(rc_user_text)'), 'rc_ip=\'' . $ip . '\'');
+		
+		$return = array();
+       	foreach ($result as $row) {
+			$return[] = (string)$row->rc_user_text;
+		}
+		array_unique($return);
+		
+ 		return $return;
 	}
 }
 
