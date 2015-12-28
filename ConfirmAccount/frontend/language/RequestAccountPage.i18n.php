@@ -1123,6 +1123,15 @@ Este código de confirmación caducará el $4.',
 La dirección de correo electrónico ha sido confirmada. Puedes confirmar la solicitud aquí "$2".',
 	'acct_request_throttle_hit' => 'Perdón, ya has solicitado {{PLURAL:$1|1 cuenta|$1 cuentas}}.
 No puedes hacer ninguna otra solicitud.',
+
+//Scratch-specific stuff
+	'requestaccount-user-verification' => 'Verificion de usuario',
+	'requestaccount-code-troubleshoot' => '\'\'\'Aviso:\'\'\' Si tienes problemas con el sistema de verificacion, por favor lee la [[Scratch_Wiki:Become a contributor/Verification code troubleshooting|pagina de soluciones]].',
+	'requestaccount-set-pwd'			=> 'Decide la contrasena',
+	'requestaccount-project-info'		=> 'Por favor ve al [$1 proyecto de verificacion] y comenta el codigo siguiente:<br />\'\'\'$2\'\'\'',
+	'requestaccount-project-link' 		=> 'http://scratch.mit.edu/projects/10135908/',
+	'requestaccount-nocomment-error'	=> 'No aparece como hayas comentado el codigo.',
+	'requestaccount-api-failed'			=> 'Estamos teniendo problemas con el servidor. Por favor trata de registrarte otra vez en un tiempo diferente.',
 );
 
 /** Estonian (eesti)

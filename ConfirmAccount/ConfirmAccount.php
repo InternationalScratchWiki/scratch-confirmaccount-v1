@@ -1,7 +1,8 @@
 <?php
-/*
- (c) Aaron Schulz 2007, GPL
 
+/*
+
+ (c) Aaron Schulz 2007, GPL
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation; either version 2 of the License, or
@@ -16,6 +17,7 @@
  with this program; if not, write to the Free Software Foundation, Inc.,
  59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  http://www.gnu.org/copyleft/gpl.html
+
 */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -36,9 +38,11 @@ require( dirname( __FILE__ ) . '/ConfirmAccount.config.php' );
 
 # Define were PHP files and i18n files are located
 require( dirname( __FILE__ ) . '/ConfirmAccount.setup.php' );
+
 ConfirmAccountSetup::defineSourcePaths( $wgAutoloadClasses, $wgExtensionMessagesFiles );
 
 # Define JS/CSS modules and file locations
+require( dirname( __FILE__ ) . '/frontend/ConfirmAccountUI.setup.php' );
 ConfirmAccountUISetup::defineResourceModules( $wgResourceModules );
 
 # Let some users confirm account requests and view credentials for created accounts
@@ -66,16 +70,22 @@ $wgHooks['LoadExtensionSchemaUpdates'][] = 'ConfirmAccountUpdaterHooks::addSchem
 $wgExtensionFunctions[] = 'efLoadConfirmAccount';
 
 /**
+
  * This function is for setup that has to happen in Setup.php
  * when the functions in $wgExtensionFunctions get executed.
  * @return void
+
  */
+
 function efLoadConfirmAccount() {
 	global $wgEnableEmail;
+
 	# This extension needs email enabled!
 	# Otherwise users can't get their passwords...
-	if ( !$wgEnableEmail ) {
+
+	/*if ( !$wgEnableEmail ) {
 		echo "ConfirmAccount extension requires \$wgEnableEmail set to true.\n";
 		exit( 1 ) ;
-	}
+	}*/
 }
+
