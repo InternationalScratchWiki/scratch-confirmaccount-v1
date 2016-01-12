@@ -119,7 +119,7 @@ class AccountRequestSubmission {
 	    foreach ($matches[5] as $key => $val) {
 		   $user = $matches[1][$key];
 		   $comment = trim($val);
-		   if ((strtolower($user) == strtolower(htmlspecialchars($this->userName)) && $this->stringContainsArray($comment, $codes)) {
+		   if (strtolower($user) == strtolower(htmlspecialchars($this->userName)) && $this->stringContainsArray($comment, $codes)) {
 			  $success = true;
 			  break;
 		   }
